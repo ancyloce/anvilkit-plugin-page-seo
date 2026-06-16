@@ -1,0 +1,118 @@
+{
+	"schemaVersion": "2.0",
+	"id": 0,
+	"name": "@anvilkit/plugin-page-seo",
+	"variant": "project",
+	"kind": 1,
+	"flags": {},
+	"children": [
+		{
+			"id": 1,
+			"name": "createPageSeoPlugin",
+			"variant": "declaration",
+			"kind": 64,
+			"flags": {},
+			"signatures": [
+				{
+					"id": 2,
+					"name": "createPageSeoPlugin",
+					"variant": "signature",
+					"kind": 4096,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Create the Page SEO plugin (PRD 0004 F5). Contributes a sidebar rail panel\nthat edits "
+							},
+							{
+								"kind": "code",
+								"text": "`root.props.seo`"
+							},
+							{
+								"kind": "text",
+								"text": " via the core "
+							},
+							{
+								"kind": "code",
+								"text": "`registerSeoPanel`"
+							},
+							{
+								"kind": "text",
+								"text": " seam. Returns a\n"
+							},
+							{
+								"kind": "code",
+								"text": "`StudioPlugin`"
+							},
+							{
+								"kind": "text",
+								"text": "; its "
+							},
+							{
+								"kind": "code",
+								"text": "`register`"
+							},
+							{
+								"kind": "text",
+								"text": " wires the i18n catalog + panel and cleans both\nup on "
+							},
+							{
+								"kind": "code",
+								"text": "`onDestroy`"
+							},
+							{
+								"kind": "text",
+								"text": "."
+							}
+						]
+					},
+					"type": {
+						"type": "reference",
+						"target": {
+							"packageName": "@anvilkit/core",
+							"packagePath": "src/types/plugin.ts",
+							"qualifiedName": "StudioPlugin"
+						},
+						"name": "StudioPlugin",
+						"package": "@anvilkit/core"
+					}
+				}
+			]
+		}
+	],
+	"groups": [
+		{
+			"title": "Functions",
+			"children": [
+				1
+			]
+		}
+	],
+	"packageName": "@anvilkit/plugin-page-seo",
+	"symbolIdMap": {
+		"0": {
+			"packageName": "@anvilkit/plugin-page-seo",
+			"packagePath": "src/index.ts",
+			"qualifiedName": ""
+		},
+		"1": {
+			"packageName": "@anvilkit/plugin-page-seo",
+			"packagePath": "src/plugin.ts",
+			"qualifiedName": "createPageSeoPlugin"
+		},
+		"2": {
+			"packageName": "@anvilkit/plugin-page-seo",
+			"packagePath": "src/plugin.ts",
+			"qualifiedName": "createPageSeoPlugin"
+		}
+	},
+	"files": {
+		"entries": {
+			"1": "src/index.ts"
+		},
+		"reflections": {
+			"1": 0
+		}
+	}
+}
