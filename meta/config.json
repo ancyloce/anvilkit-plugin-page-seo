@@ -1,0 +1,8 @@
+{
+	"id": "anvilkit-plugin-page-seo",
+	"name": "Page SEO",
+	"version": "0.1.0",
+	"coreVersion": "^0.1.0-alpha",
+	"description": "Edit a page's SEO metadata (title, description, OG image, canonical, noindex) on root.props.seo via the sidebar rail.",
+	"capabilities": { "sidebar": true }
+}
