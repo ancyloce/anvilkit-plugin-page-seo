@@ -1,0 +1,91 @@
+{
+	"name": "@anvilkit/plugin-page-seo",
+	"version": "0.1.0",
+	"description": "Rail panel that edits a page's SEO metadata (root.props.seo) through the <Studio> plugin contract.",
+	"type": "module",
+	"main": "./dist/index.cjs",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"import": {
+				"types": "./dist/index.d.ts",
+				"default": "./dist/index.js"
+			},
+			"require": {
+				"types": "./dist/index.d.cts",
+				"default": "./dist/index.cjs"
+			}
+		}
+	},
+	"files": [
+		"dist",
+		"meta",
+		"i18n"
+	],
+	"license": "MIT",
+	"sideEffects": false,
+	"publishConfig": {
+		"access": "public"
+	},
+	"peerDependencies": {
+		"@puckeditor/core": "^0.21.3",
+		"react": ">=19.0.0",
+		"react-dom": ">=19.0.0"
+	},
+	"peerDependenciesMeta": {
+		"@puckeditor/core": {
+			"optional": false
+		},
+		"react": {
+			"optional": false
+		},
+		"react-dom": {
+			"optional": false
+		}
+	},
+	"dependencies": {
+		"@anvilkit/core": "workspace:*"
+	},
+	"scripts": {
+		"build": "rslib build",
+		"dev": "rslib build --watch",
+		"lint": "pnpm exec biome lint package.json tsconfig.json rslib.config.ts vitest.config.ts src",
+		"format": "pnpm exec biome check --write package.json tsconfig.json rslib.config.ts vitest.config.ts src",
+		"typecheck": "tsc --noEmit",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"publint": "publint",
+		"check:publint": "publint",
+		"check:circular": "madge --circular --extensions ts,tsx src/",
+		"check:peer-deps": "node ./scripts/check-peer-deps.mjs",
+		"check:bundle-budget": "node ./scripts/check-bundle-budget.mjs",
+		"check:api-snapshot": "node ./scripts/check-api-snapshot.mjs",
+		"check:all": "pnpm check:publint && pnpm check:circular && pnpm check:peer-deps && pnpm check:bundle-budget && pnpm check:api-snapshot",
+		"size": "size-limit"
+	},
+	"devDependencies": {
+		"@anvilkit/biome-config": "workspace:*",
+		"@anvilkit/core": "workspace:*",
+		"@anvilkit/typescript-config": "workspace:*",
+		"@anvilkit/vitest-config": "workspace:*",
+		"@puckeditor/core": "^0.21.3",
+		"@rsbuild/plugin-react": "^2.0.0",
+		"@rslib/core": "^0.22.0",
+		"@testing-library/jest-dom": "^6.9.1",
+		"@testing-library/react": "^16.3.2",
+		"@types/node": "^25.9.1",
+		"@types/react": "^19.2.14",
+		"@types/react-dom": "19.2.3",
+		"esbuild": "^0.28.0",
+		"jsdom": "^29.1.1",
+		"madge": "^8.0.0",
+		"publint": "^0.3.21",
+		"react": "^19.2.6",
+		"react-dom": "^19.2.6",
+		"typedoc": "^0.28.19",
+		"typedoc-plugin-markdown": "^4.11.0",
+		"typescript": "6.0.3",
+		"vitest": "^4.1.7"
+	}
+}
