@@ -1,0 +1,8 @@
+{
+	"pageSeo.panel.aria": "Page SEO",
+	"pageSeo.field.title": "Meta title",
+	"pageSeo.field.description": "Meta description",
+	"pageSeo.field.ogImage": "OG image URL",
+	"pageSeo.field.canonical": "Canonical URL",
+	"pageSeo.field.noIndex": "Hide from search engines (noindex)"
+}
