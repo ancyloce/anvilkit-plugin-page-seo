@@ -4,6 +4,12 @@
 		"path": "dist/index.js",
 		"limit": "12 KB",
 		"gzip": true,
-		"ignore": ["react", "react-dom", "@puckeditor/core", "@anvilkit/core"]
+		"ignore": [
+			"react",
+			"react-dom",
+			"@puckeditor/core",
+			"@anvilkit/core",
+			"@anvilkit/ui"
+		]
 	}
 ]

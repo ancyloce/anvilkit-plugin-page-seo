@@ -17,7 +17,13 @@ export default defineConfig({
 	],
 	output: {
 		target: "web",
-		externals: ["@anvilkit/core", "@puckeditor/core", "react", "react-dom"],
+		externals: [
+			"@anvilkit/core",
+			"@anvilkit/ui",
+			"@puckeditor/core",
+			"react",
+			"react-dom",
+		],
 	},
 	plugins: [pluginReact()],
 });
