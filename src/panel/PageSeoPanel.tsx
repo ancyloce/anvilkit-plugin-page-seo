@@ -2,8 +2,29 @@
 // bind `React` explicitly or dist throws "React is not defined" at runtime.
 import * as React from "react";
 import { useMsg } from "@anvilkit/core/i18n";
-import { usePuck } from "@puckeditor/core";
+import { createUsePuck, type useGetPuck } from "@puckeditor/core";
 import type { CSSProperties, ReactElement } from "react";
+
+/**
+ * `createUsePuck()` builds a selector-aware hook so this panel re-renders only
+ * when the slice it projects (`appState.data`) changes by `Object.is`, not on
+ * every unrelated Puck state change (selection, drag, transient UI). A bare
+ * `usePuck()` subscribes to the whole snapshot and re-renders on all of them.
+ *
+ * The hook is built lazily at first call (module-scoped singleton) so partial
+ * test mocks of `@puckeditor/core` do not crash importers at module-evaluate
+ * time; after the first call the same hook reference is invoked unconditionally
+ * every render, satisfying the Rules of Hooks. Mirrors `@anvilkit/core`'s
+ * `useReactivePuck`.
+ */
+type PuckSnapshot = ReturnType<ReturnType<typeof useGetPuck>>;
+let _usePuck: ReturnType<typeof createUsePuck> | null = null;
+function usePuckSlice<TResult>(selector: (snapshot: PuckSnapshot) => TResult): TResult {
+	if (_usePuck === null) {
+		_usePuck = createUsePuck();
+	}
+	return _usePuck(selector);
+}
 
 /** The SEO sub-shape this panel edits (mirrors `@anvilkit/schema` `PageSeo`). */
 interface PageSeoLike {
@@ -47,8 +68,10 @@ const checkboxRowStyle: CSSProperties = {
  */
 export function PageSeoPanel(): ReactElement {
 	const msg = useMsg();
-	const { appState, dispatch } = usePuck();
-	const data = appState.data;
+	// Narrow selectors: `data` is the only slice this panel reads, and `dispatch`
+	// is referentially stable — so the panel re-renders on page-data edits only.
+	const data = usePuckSlice((s) => s.appState.data);
+	const dispatch = usePuckSlice((s) => s.dispatch);
 	const rootProps = (data.root.props ?? {}) as Record<string, unknown> & {
 		seo?: PageSeoLike;
 	};
@@ -56,7 +79,7 @@ export function PageSeoPanel(): ReactElement {
 
 	const update = (patch: Partial<PageSeoLike>): void => {
 		const nextSeo: PageSeoLike = { ...seo, ...patch };
-		// Puck's default `usePuck()` types `root.props` as `{ title?: string }`,
+		// Puck's default snapshot types `root.props` as `{ title?: string }`,
 		// which has no `seo`; the page model widens it. Build a complete next
 		// snapshot and cast it back to the editor's `Data` type so the immutable
 		// `setData` merge overwrites `root.props` wholesale.

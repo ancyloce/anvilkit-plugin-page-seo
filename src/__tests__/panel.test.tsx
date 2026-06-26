@@ -11,7 +11,11 @@ const baseData = {
 };
 
 vi.mock("@puckeditor/core", () => ({
-	usePuck: () => ({ appState: { data: baseData }, dispatch }),
+	// `createUsePuck()` returns a selector hook; the mock applies the caller's
+	// selector to a static snapshot so `usePuckSlice((s) => s.appState.data)` and
+	// `usePuckSlice((s) => s.dispatch)` resolve without a real `<Puck>` provider.
+	createUsePuck: () => (selector: (s: unknown) => unknown) =>
+		selector({ appState: { data: baseData }, dispatch }),
 }));
 vi.mock("@anvilkit/core/i18n", () => ({
 	useMsg: () => (key: string) => key,
