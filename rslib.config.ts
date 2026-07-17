@@ -12,8 +12,18 @@ export default defineConfig({
 		},
 	},
 	lib: [
-		{ bundle: false, dts: { autoExtension: true }, format: "esm" },
-		{ bundle: false, dts: { autoExtension: true }, format: "cjs" },
+		{
+			bundle: false,
+			dts: { autoExtension: true },
+			id: "esm",
+			format: "esm",
+		},
+		{
+			bundle: false,
+			dts: { autoExtension: true, distPath: "./dist/cjs" },
+			id: "cjs",
+			format: "cjs",
+		},
 	],
 	output: {
 		target: "web",
